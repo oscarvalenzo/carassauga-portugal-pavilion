@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: carassauga-backend
+    env: node
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npx ts-node --transpile-only src/server.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_URL
+        value: https://carassauga-app.web.app
+    healthCheckPath: /health

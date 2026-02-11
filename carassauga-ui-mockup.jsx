@@ -1,0 +1,1659 @@
+import React, { useState } from 'react';
+import { Home, Map, Trophy, Camera, User, ChevronRight, Clock, Users, MapPin, Star, Play, QrCode, Gift, Share2, Calendar } from 'lucide-react';
+
+export default function CarassaugaApp() {
+  const [currentScreen, setCurrentScreen] = useState('home');
+  const [questProgress, setQuestProgress] = useState({
+    foodie: 2,
+    navigator: 1,
+    culture: 3,
+    social: 0
+  });
+  const [notifications, setNotifications] = useState(1);
+
+  // Screen Components
+  const HomeScreen = () => (
+    <div className="screen-content">
+      {/* Hero Section */}
+      <div className="hero-banner">
+        <div className="hero-overlay"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1555883006-0f5a0915a80f?w=800&q=80" 
+          alt="Portugal Pavilion"
+          className="hero-image"
+        />
+        <div className="hero-content">
+          <div className="pavilion-badge">PORTUGAL PAVILION</div>
+          <h1 className="hero-title">Bem-vindo!</h1>
+          <p className="hero-subtitle">Experience Portuguese culture through football, food & heritage</p>
+        </div>
+      </div>
+
+      {/* Family Group Status */}
+      <div className="family-card">
+        <div className="family-header">
+          <Users size={20} className="icon-green" />
+          <span className="family-title">Santos Family Group</span>
+          <span className="family-count">4 members nearby</span>
+        </div>
+        <div className="family-members">
+          <div className="member-dot active"></div>
+          <div className="member-dot active"></div>
+          <div className="member-dot active"></div>
+          <div className="member-dot active"></div>
+        </div>
+      </div>
+
+      {/* Live Now Section */}
+      <div className="section">
+        <div className="section-header">
+          <h2 className="section-title">Happening Now</h2>
+          <Clock size={18} className="icon-gold" />
+        </div>
+        
+        <div className="live-card performance-card">
+          <div className="live-badge">
+            <div className="live-pulse"></div>
+            LIVE NOW
+          </div>
+          <h3 className="card-title">Fado Performance</h3>
+          <p className="card-subtitle">Main Stage • 35 people watching</p>
+          <div className="card-actions">
+            <button className="btn-primary">
+              <MapPin size={16} />
+              Navigate There
+            </button>
+            <button className="btn-icon">
+              <Share2 size={16} />
+            </button>
+          </div>
+        </div>
+
+        <div className="live-card queue-card">
+          <div className="queue-status">
+            <div className="queue-icon">
+              <Users size={20} />
+            </div>
+            <div className="queue-info">
+              <span className="queue-label">Virtual Queue</span>
+              <span className="queue-detail">Bacalhau à Brás - 8 min wait</span>
+            </div>
+          </div>
+          <button className="btn-secondary">Join Queue</button>
+        </div>
+      </div>
+
+      {/* Active Quests */}
+      <div className="section">
+        <div className="section-header">
+          <h2 className="section-title">Your Quests</h2>
+          <Trophy size={18} className="icon-gold" />
+        </div>
+        
+        <div className="quest-grid">
+          <div className="quest-card active">
+            <div className="quest-icon foodie">🍴</div>
+            <div className="quest-info">
+              <span className="quest-name">Foodie Explorer</span>
+              <div className="progress-bar">
+                <div className="progress-fill" style={{width: '66%'}}></div>
+              </div>
+              <span className="quest-progress">2/3 dishes</span>
+            </div>
+          </div>
+
+          <div className="quest-card active">
+            <div className="quest-icon culture">🎭</div>
+            <div className="quest-info">
+              <span className="quest-name">Culture Keeper</span>
+              <div className="progress-bar">
+                <div className="progress-fill" style={{width: '100%'}}></div>
+              </div>
+              <span className="quest-progress">3/3 complete!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="quick-actions">
+        <button className="quick-btn">
+          <QrCode size={24} />
+          <span>Scan QR</span>
+        </button>
+        <button className="quick-btn">
+          <Camera size={24} />
+          <span>AR Photo</span>
+        </button>
+        <button className="quick-btn">
+          <Gift size={24} />
+          <span>Rewards</span>
+        </button>
+      </div>
+    </div>
+  );
+
+  const MapScreen = () => (
+    <div className="screen-content">
+      <div className="map-header">
+        <h2 className="screen-title">Pavilion Navigator</h2>
+        <button className="btn-icon">
+          <Users size={20} />
+        </button>
+      </div>
+
+      <div className="map-container">
+        <svg viewBox="0 0 400 500" className="pavilion-map">
+          {/* Background */}
+          <rect width="400" height="500" fill="#f8f8f8"/>
+          
+          {/* Building outline */}
+          <rect x="50" y="100" width="300" height="350" fill="white" stroke="#e0e0e0" strokeWidth="2"/>
+          
+          {/* Entrance */}
+          <rect x="175" y="430" width="50" height="20" fill="#2d7f3e"/>
+          <text x="200" y="445" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">ENTRANCE</text>
+          
+          {/* Food Area */}
+          <circle cx="120" cy="200" r="40" fill="#ffd700" opacity="0.3"/>
+          <text x="120" y="200" textAnchor="middle" fontSize="12" fontWeight="bold">🍽️</text>
+          <text x="120" y="215" textAnchor="middle" fontSize="10">Food Court</text>
+          <circle cx="115" cy="195" r="8" fill="#ff4444" className="pulse-dot"/>
+          
+          {/* Main Stage */}
+          <rect x="220" y="160" width="100" height="60" fill="#e74c3c" opacity="0.2" rx="5"/>
+          <text x="270" y="185" textAnchor="middle" fontSize="12" fontWeight="bold">🎭</text>
+          <text x="270" y="200" textAnchor="middle" fontSize="10">Main Stage</text>
+          <text x="270" y="213" textAnchor="middle" fontSize="8" fill="#e74c3c" fontWeight="bold">LIVE NOW</text>
+          
+          {/* Photo Wall */}
+          <circle cx="280" cy="320" r="35" fill="#3498db" opacity="0.2"/>
+          <text x="280" y="320" textAnchor="middle" fontSize="12" fontWeight="bold">📸</text>
+          <text x="280" y="335" textAnchor="middle" fontSize="10">AR Photo Wall</text>
+          
+          {/* Trivia Corner */}
+          <circle cx="120" cy="320" r="35" fill="#9b59b6" opacity="0.2"/>
+          <text x="120" y="320" textAnchor="middle" fontSize="12" fontWeight="bold">🧠</text>
+          <text x="120" y="335" textAnchor="middle" fontSize="10">Trivia Zone</text>
+          
+          {/* You are here marker */}
+          <circle cx="200" cy="380" r="12" fill="#2d7f3e"/>
+          <text x="200" y="385" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">YOU</text>
+          
+          {/* Family members */}
+          <circle cx="125" cy="205" r="8" fill="#3498db" stroke="white" strokeWidth="2"/>
+          <circle cx="275" cy="325" r="8" fill="#e74c3c" stroke="white" strokeWidth="2"/>
+        </svg>
+      </div>
+
+      <div className="map-legend">
+        <div className="legend-item">
+          <div className="legend-dot green"></div>
+          <span>You</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot blue"></div>
+          <span>Maria</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot red"></div>
+          <span>Sofia</span>
+        </div>
+        <div className="legend-item">
+          <div className="legend-dot pulse"></div>
+          <span>Active Queue</span>
+        </div>
+      </div>
+
+      <div className="map-actions">
+        <button className="btn-primary full-width">
+          <MapPin size={18} />
+          Navigate to Main Stage (2 min walk)
+        </button>
+      </div>
+    </div>
+  );
+
+  const QuestScreen = () => (
+    <div className="screen-content">
+      <div className="quest-header">
+        <h2 className="screen-title">The Portuguese Journey</h2>
+        <div className="total-score">
+          <Trophy size={20} className="icon-gold" />
+          <span className="score-value">650 pts</span>
+        </div>
+      </div>
+
+      {/* Progress Overview */}
+      <div className="progress-overview">
+        <div className="overall-progress">
+          <div className="progress-circle">
+            <svg viewBox="0 0 100 100" className="circle-svg">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" strokeWidth="8"/>
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#2d7f3e" strokeWidth="8" 
+                strokeDasharray="283" strokeDashoffset="70" strokeLinecap="round"
+                transform="rotate(-90 50 50)"/>
+            </svg>
+            <div className="circle-text">
+              <span className="circle-number">75%</span>
+              <span className="circle-label">Complete</span>
+            </div>
+          </div>
+          <div className="progress-stats">
+            <div className="stat-item">
+              <span className="stat-value">6/8</span>
+              <span className="stat-label">Badges Earned</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-value">12</span>
+              <span className="stat-label">Activities Done</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quest Categories */}
+      <div className="quest-categories">
+        <div className="category-card completed">
+          <div className="category-header">
+            <div className="category-icon-wrapper">
+              <span className="category-emoji">🎭</span>
+            </div>
+            <div className="category-info">
+              <h3 className="category-title">Culture Keeper</h3>
+              <p className="category-subtitle">3/3 activities • 250 pts</p>
+            </div>
+            <div className="check-badge">✓</div>
+          </div>
+          <div className="category-activities">
+            <div className="activity-item done">✓ Watch Fado Performance</div>
+            <div className="activity-item done">✓ Learn 5 Portuguese Words</div>
+            <div className="activity-item done">✓ Share Your Heritage Story</div>
+          </div>
+        </div>
+
+        <div className="category-card active">
+          <div className="category-header">
+            <div className="category-icon-wrapper">
+              <span className="category-emoji">🍴</span>
+            </div>
+            <div className="category-info">
+              <h3 className="category-title">Foodie Explorer</h3>
+              <p className="category-subtitle">2/3 activities • 200 pts</p>
+            </div>
+            <div className="progress-badge">66%</div>
+          </div>
+          <div className="category-activities">
+            <div className="activity-item done">✓ Try Bacalhau à Brás</div>
+            <div className="activity-item done">✓ Taste Pastéis de Nata</div>
+            <div className="activity-item current">
+              <span>Try Caldo Verde</span>
+              <button className="activity-btn">
+                <QrCode size={14} />
+                Scan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="category-card">
+          <div className="category-header">
+            <div className="category-icon-wrapper">
+              <span className="category-emoji">⚽</span>
+            </div>
+            <div className="category-info">
+              <h3 className="category-title">Futebol Fan</h3>
+              <p className="category-subtitle">1/4 activities • 100 pts</p>
+            </div>
+            <div className="progress-badge">25%</div>
+          </div>
+          <div className="category-activities">
+            <div className="activity-item done">✓ AR Photo with Ronaldo</div>
+            <div className="activity-item">Complete Football Trivia</div>
+            <div className="activity-item">Try Panna Skills Challenge</div>
+            <div className="activity-item">Learn About Portugal's World Cup History</div>
+          </div>
+        </div>
+
+        <div className="category-card locked">
+          <div className="category-header">
+            <div className="category-icon-wrapper">
+              <span className="category-emoji">🤝</span>
+            </div>
+            <div className="category-info">
+              <h3 className="category-title">Social Connector</h3>
+              <p className="category-subtitle">Unlock at 500 pts</p>
+            </div>
+            <div className="lock-badge">🔒</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Leaderboard Teaser */}
+      <div className="leaderboard-teaser">
+        <div className="teaser-header">
+          <Star size={18} className="icon-gold" />
+          <span>Family Leaderboard</span>
+        </div>
+        <div className="leaderboard-mini">
+          <div className="leader-item first">
+            <span className="rank">1st</span>
+            <span className="name">Sofia</span>
+            <span className="points">850 pts</span>
+          </div>
+          <div className="leader-item second">
+            <span className="rank">2nd</span>
+            <span className="name">You (Maria)</span>
+            <span className="points">650 pts</span>
+          </div>
+          <div className="leader-item third">
+            <span className="rank">3rd</span>
+            <span className="name">Miguel</span>
+            <span className="points">480 pts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const ProfileScreen = () => (
+    <div className="screen-content">
+      <div className="profile-header">
+        <div className="profile-avatar">
+          <div className="avatar-circle">MS</div>
+          <button className="edit-btn">✏️</button>
+        </div>
+        <h2 className="profile-name">Maria Santos</h2>
+        <p className="profile-subtitle">The Nurturer • Level 12</p>
+      </div>
+
+      {/* Badges Showcase */}
+      <div className="badges-section">
+        <h3 className="section-subtitle">Earned Badges</h3>
+        <div className="badges-grid">
+          <div className="badge-item earned">
+            <div className="badge-icon">🎭</div>
+            <span className="badge-name">Culture Keeper</span>
+          </div>
+          <div className="badge-item earned">
+            <div className="badge-icon">🍴</div>
+            <span className="badge-name">Foodie Pro</span>
+          </div>
+          <div className="badge-item earned">
+            <div className="badge-icon">📸</div>
+            <span className="badge-name">Photo Expert</span>
+          </div>
+          <div className="badge-item earned">
+            <div className="badge-icon">⚽</div>
+            <span className="badge-name">Futebol Fan</span>
+          </div>
+          <div className="badge-item locked">
+            <div className="badge-icon">🌟</div>
+            <span className="badge-name">Complete All</span>
+          </div>
+          <div className="badge-item locked">
+            <div className="badge-icon">👥</div>
+            <span className="badge-name">Social Star</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Digital Passport */}
+      <div className="passport-section">
+        <h3 className="section-subtitle">Your Digital Passport</h3>
+        <div className="passport-card">
+          <div className="passport-cover">
+            <div className="passport-emblem">🇵🇹</div>
+            <h4 className="passport-title">Portuguese Journey</h4>
+            <p className="passport-date">Carassauga 2025</p>
+          </div>
+          <div className="passport-stamps">
+            <div className="stamp earned">✓</div>
+            <div className="stamp earned">✓</div>
+            <div className="stamp earned">✓</div>
+            <div className="stamp earned">✓</div>
+            <div className="stamp earned">✓</div>
+            <div className="stamp earned">✓</div>
+            <div className="stamp empty">—</div>
+            <div className="stamp empty">—</div>
+          </div>
+          <button className="btn-secondary full-width">
+            <Share2 size={16} />
+            Share Your Journey
+          </button>
+        </div>
+      </div>
+
+      {/* Recipe Collection */}
+      <div className="recipes-section">
+        <h3 className="section-subtitle">Saved Recipes</h3>
+        <div className="recipe-list">
+          <div className="recipe-item">
+            <img src="https://images.unsplash.com/photo-1625944230945-1b7dd3b949ab?w=200&q=80" alt="Bacalhau" className="recipe-thumb"/>
+            <div className="recipe-info">
+              <span className="recipe-name">Bacalhau à Brás</span>
+              <span className="recipe-meta">Traditional • Medium</span>
+            </div>
+            <ChevronRight size={18} className="recipe-arrow"/>
+          </div>
+          <div className="recipe-item">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&q=80" alt="Pasteis" className="recipe-thumb"/>
+            <div className="recipe-info">
+              <span className="recipe-name">Pastéis de Nata</span>
+              <span className="recipe-meta">Dessert • Easy</span>
+            </div>
+            <ChevronRight size={18} className="recipe-arrow"/>
+          </div>
+        </div>
+      </div>
+
+      {/* Post-Event Content */}
+      <div className="post-event-section">
+        <div className="unlock-card">
+          <div className="unlock-icon">🎁</div>
+          <h4 className="unlock-title">Coming Soon!</h4>
+          <p className="unlock-text">Your personalized recap video will be ready 48 hours after the festival</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Navigation
+  const NavBar = () => (
+    <nav className="navbar">
+      <button 
+        className={`nav-item ${currentScreen === 'home' ? 'active' : ''}`}
+        onClick={() => setCurrentScreen('home')}
+      >
+        <Home size={24} />
+        <span>Home</span>
+      </button>
+      <button 
+        className={`nav-item ${currentScreen === 'map' ? 'active' : ''}`}
+        onClick={() => setCurrentScreen('map')}
+      >
+        <Map size={24} />
+        <span>Map</span>
+      </button>
+      <button 
+        className={`nav-item ${currentScreen === 'quests' ? 'active' : ''}`}
+        onClick={() => setCurrentScreen('quests')}
+      >
+        <Trophy size={24} />
+        <span>Quests</span>
+        {questProgress.culture === 3 && <div className="nav-badge">1</div>}
+      </button>
+      <button 
+        className={`nav-item ${currentScreen === 'profile' ? 'active' : ''}`}
+        onClick={() => setCurrentScreen('profile')}
+      >
+        <User size={24} />
+        <span>Profile</span>
+      </button>
+    </nav>
+  );
+
+  return (
+    <div className="app-container">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        .app-container {
+          font-family: 'Inter', sans-serif;
+          background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+
+        .phone-frame {
+          width: 390px;
+          height: 844px;
+          background: white;
+          border-radius: 40px;
+          box-shadow: 0 30px 90px rgba(0,0,0,0.3),
+                      0 0 0 12px #1a1a1a,
+                      0 0 0 14px #888;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+        }
+
+        .phone-notch {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 150px;
+          height: 28px;
+          background: #1a1a1a;
+          border-radius: 0 0 20px 20px;
+          z-index: 1000;
+        }
+
+        .screen-wrapper {
+          flex: 1;
+          background: #f5f5f5;
+          overflow-y: auto;
+          overflow-x: hidden;
+          padding-bottom: 80px;
+        }
+
+        .screen-content {
+          animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero-banner {
+          position: relative;
+          height: 280px;
+          overflow: hidden;
+        }
+
+        .hero-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .hero-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(to bottom, 
+            rgba(0,0,0,0.1) 0%,
+            rgba(0,0,0,0.6) 100%);
+        }
+
+        .hero-content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 24px;
+          color: white;
+        }
+
+        .pavilion-badge {
+          display: inline-block;
+          background: rgba(255,255,255,0.25);
+          backdrop-filter: blur(10px);
+          padding: 6px 14px;
+          border-radius: 20px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          margin-bottom: 12px;
+          border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .hero-title {
+          font-family: 'Fraunces', serif;
+          font-size: 48px;
+          font-weight: 800;
+          margin-bottom: 8px;
+          text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .hero-subtitle {
+          font-size: 15px;
+          opacity: 0.95;
+          font-weight: 500;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Family Card */
+        .family-card {
+          margin: -30px 20px 20px 20px;
+          background: white;
+          border-radius: 16px;
+          padding: 16px 20px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+          border: 1px solid rgba(45,127,62,0.1);
+        }
+
+        .family-header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 12px;
+        }
+
+        .family-title {
+          font-weight: 700;
+          font-size: 15px;
+          color: #1a1a1a;
+        }
+
+        .family-count {
+          margin-left: auto;
+          font-size: 13px;
+          color: #2d7f3e;
+          font-weight: 600;
+        }
+
+        .family-members {
+          display: flex;
+          gap: 8px;
+          padding-top: 8px;
+          border-top: 1px solid #f0f0f0;
+        }
+
+        .member-dot {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #e0e0e0;
+          border: 2px solid white;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .member-dot.active {
+          background: linear-gradient(135deg, #2d7f3e 0%, #1a5c2a 100%);
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+
+        /* Section Styles */
+        .section {
+          padding: 0 20px;
+          margin-bottom: 24px;
+        }
+
+        .section-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 16px;
+        }
+
+        .section-title {
+          font-family: 'Fraunces', serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: #1a1a1a;
+        }
+
+        .icon-green {
+          color: #2d7f3e;
+        }
+
+        .icon-gold {
+          color: #ffd700;
+        }
+
+        /* Live Cards */
+        .live-card {
+          background: white;
+          border-radius: 16px;
+          padding: 20px;
+          margin-bottom: 12px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .performance-card {
+          border-left: 4px solid #e74c3c;
+        }
+
+        .queue-card {
+          border-left: 4px solid #ffd700;
+        }
+
+        .live-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: #e74c3c;
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          margin-bottom: 12px;
+        }
+
+        .live-pulse {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: white;
+          animation: pulseDot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .card-title {
+          font-weight: 700;
+          font-size: 18px;
+          margin-bottom: 6px;
+          color: #1a1a1a;
+        }
+
+        .card-subtitle {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 16px;
+        }
+
+        .card-actions {
+          display: flex;
+          gap: 8px;
+        }
+
+        .btn-primary {
+          flex: 1;
+          background: linear-gradient(135deg, #2d7f3e 0%, #1a5c2a 100%);
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-weight: 600;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(45,127,62,0.3);
+        }
+
+        .btn-secondary {
+          background: white;
+          color: #2d7f3e;
+          border: 2px solid #2d7f3e;
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-weight: 600;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+          background: #2d7f3e;
+          color: white;
+        }
+
+        .btn-icon {
+          width: 44px;
+          height: 44px;
+          background: #f5f5f5;
+          border: none;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+          background: #e0e0e0;
+        }
+
+        .full-width {
+          width: 100%;
+        }
+
+        /* Queue Status */
+        .queue-status {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 16px;
+        }
+
+        .queue-icon {
+          width: 48px;
+          height: 48px;
+          background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
+
+        .queue-info {
+          flex: 1;
+        }
+
+        .queue-label {
+          display: block;
+          font-weight: 700;
+          font-size: 14px;
+          color: #1a1a1a;
+          margin-bottom: 4px;
+        }
+
+        .queue-detail {
+          display: block;
+          font-size: 13px;
+          color: #666;
+        }
+
+        /* Quest Cards */
+        .quest-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .quest-card {
+          background: white;
+          border-radius: 16px;
+          padding: 16px;
+          display: flex;
+          gap: 14px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          border: 2px solid transparent;
+          transition: all 0.2s;
+        }
+
+        .quest-card.active {
+          border-color: #2d7f3e;
+        }
+
+        .quest-icon {
+          width: 48px;
+          height: 48px;
+          background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          flex-shrink: 0;
+        }
+
+        .quest-icon.foodie {
+          background: linear-gradient(135deg, #fff3cd 0%, #ffd700 100%);
+        }
+
+        .quest-icon.culture {
+          background: linear-gradient(135deg, #e8d5ff 0%, #b794f6 100%);
+        }
+
+        .quest-info {
+          flex: 1;
+        }
+
+        .quest-name {
+          display: block;
+          font-weight: 700;
+          font-size: 15px;
+          color: #1a1a1a;
+          margin-bottom: 8px;
+        }
+
+        .progress-bar {
+          height: 8px;
+          background: #f0f0f0;
+          border-radius: 10px;
+          overflow: hidden;
+          margin-bottom: 6px;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, #2d7f3e 0%, #1a5c2a 100%);
+          border-radius: 10px;
+          transition: width 0.3s ease;
+        }
+
+        .quest-progress {
+          font-size: 12px;
+          color: #666;
+          font-weight: 500;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+          display: flex;
+          justify-content: space-around;
+          padding: 20px;
+          background: white;
+          margin: 0 20px 20px 20px;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .quick-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 12px;
+          border-radius: 12px;
+          transition: all 0.2s;
+          color: #1a1a1a;
+        }
+
+        .quick-btn:hover {
+          background: #f5f5f5;
+        }
+
+        .quick-btn span {
+          font-size: 12px;
+          font-weight: 600;
+        }
+
+        /* Map Screen */
+        .map-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 60px 20px 20px 20px;
+          background: white;
+        }
+
+        .screen-title {
+          font-family: 'Fraunces', serif;
+          font-size: 28px;
+          font-weight: 700;
+          color: #1a1a1a;
+        }
+
+        .map-container {
+          padding: 20px;
+          background: white;
+        }
+
+        .pavilion-map {
+          width: 100%;
+          height: auto;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .pulse-dot {
+          animation: mapPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes mapPulse {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
+        }
+
+        .map-legend {
+          display: flex;
+          gap: 16px;
+          padding: 16px 20px;
+          background: white;
+          overflow-x: auto;
+        }
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 12px;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+
+        .legend-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .legend-dot.green { background: #2d7f3e; }
+        .legend-dot.blue { background: #3498db; }
+        .legend-dot.red { background: #e74c3c; }
+        .legend-dot.pulse { 
+          background: #ff4444; 
+          animation: mapPulse 2s ease-in-out infinite;
+        }
+
+        .map-actions {
+          padding: 20px;
+          background: white;
+        }
+
+        /* Quest Screen */
+        .quest-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 60px 20px 20px 20px;
+          background: white;
+        }
+
+        .total-score {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+          padding: 8px 16px;
+          border-radius: 20px;
+          color: white;
+          font-weight: 700;
+        }
+
+        .score-value {
+          font-size: 16px;
+        }
+
+        .progress-overview {
+          padding: 20px;
+          background: white;
+        }
+
+        .overall-progress {
+          display: flex;
+          gap: 24px;
+          align-items: center;
+        }
+
+        .progress-circle {
+          position: relative;
+          width: 120px;
+          height: 120px;
+          flex-shrink: 0;
+        }
+
+        .circle-svg {
+          width: 100%;
+          height: 100%;
+          transform: rotate(0deg);
+        }
+
+        .circle-text {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+        }
+
+        .circle-number {
+          display: block;
+          font-family: 'Fraunces', serif;
+          font-size: 28px;
+          font-weight: 800;
+          color: #2d7f3e;
+        }
+
+        .circle-label {
+          display: block;
+          font-size: 12px;
+          color: #666;
+          font-weight: 600;
+        }
+
+        .progress-stats {
+          flex: 1;
+        }
+
+        .stat-item {
+          margin-bottom: 16px;
+        }
+
+        .stat-value {
+          display: block;
+          font-family: 'Fraunces', serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin-bottom: 4px;
+        }
+
+        .stat-label {
+          display: block;
+          font-size: 13px;
+          color: #666;
+          font-weight: 500;
+        }
+
+        /* Quest Categories */
+        .quest-categories {
+          padding: 0 20px 20px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .category-card {
+          background: white;
+          border-radius: 16px;
+          padding: 20px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          border: 2px solid transparent;
+          transition: all 0.2s;
+        }
+
+        .category-card.completed {
+          border-color: #2d7f3e;
+          background: linear-gradient(white, white) padding-box,
+                      linear-gradient(135deg, #2d7f3e, #1a5c2a) border-box;
+        }
+
+        .category-card.active {
+          border-color: #ffd700;
+        }
+
+        .category-card.locked {
+          opacity: 0.5;
+        }
+
+        .category-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+        }
+
+        .category-icon-wrapper {
+          width: 56px;
+          height: 56px;
+          background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .category-emoji {
+          font-size: 28px;
+        }
+
+        .category-info {
+          flex: 1;
+        }
+
+        .category-title {
+          font-weight: 700;
+          font-size: 17px;
+          color: #1a1a1a;
+          margin-bottom: 4px;
+        }
+
+        .category-subtitle {
+          font-size: 13px;
+          color: #666;
+          font-weight: 500;
+        }
+
+        .check-badge {
+          width: 32px;
+          height: 32px;
+          background: #2d7f3e;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 18px;
+        }
+
+        .progress-badge {
+          background: #ffd700;
+          color: #1a1a1a;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-weight: 700;
+          font-size: 12px;
+        }
+
+        .lock-badge {
+          font-size: 20px;
+        }
+
+        .category-activities {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          padding-top: 12px;
+          border-top: 1px solid #f0f0f0;
+        }
+
+        .activity-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 14px;
+          padding: 8px 0;
+        }
+
+        .activity-item.done {
+          color: #2d7f3e;
+          font-weight: 600;
+        }
+
+        .activity-item.current {
+          color: #1a1a1a;
+          font-weight: 600;
+        }
+
+        .activity-btn {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: #2d7f3e;
+          color: white;
+          border: none;
+          padding: 6px 12px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        /* Leaderboard */
+        .leaderboard-teaser {
+          background: white;
+          border-radius: 16px;
+          padding: 20px;
+          margin: 0 20px 20px 20px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .teaser-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 16px;
+          font-weight: 700;
+          font-size: 16px;
+        }
+
+        .leaderboard-mini {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .leader-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px;
+          background: #f8f8f8;
+          border-radius: 12px;
+        }
+
+        .leader-item.first {
+          background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+          color: white;
+        }
+
+        .rank {
+          font-weight: 700;
+          font-size: 14px;
+          min-width: 32px;
+        }
+
+        .name {
+          flex: 1;
+          font-weight: 600;
+          font-size: 14px;
+        }
+
+        .points {
+          font-weight: 700;
+          font-size: 14px;
+        }
+
+        /* Profile Screen */
+        .profile-header {
+          text-align: center;
+          padding: 60px 20px 30px 20px;
+          background: linear-gradient(135deg, #2d7f3e 0%, #1a5c2a 100%);
+          color: white;
+        }
+
+        .profile-avatar {
+          position: relative;
+          display: inline-block;
+          margin-bottom: 16px;
+        }
+
+        .avatar-circle {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: white;
+          color: #2d7f3e;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 36px;
+          font-weight: 700;
+          border: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .edit-btn {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 32px;
+          height: 32px;
+          background: white;
+          border: none;
+          border-radius: 50%;
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .profile-name {
+          font-family: 'Fraunces', serif;
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 6px;
+        }
+
+        .profile-subtitle {
+          font-size: 14px;
+          opacity: 0.9;
+        }
+
+        /* Badges Section */
+        .badges-section,
+        .passport-section,
+        .recipes-section,
+        .post-event-section {
+          padding: 20px;
+        }
+
+        .section-subtitle {
+          font-weight: 700;
+          font-size: 18px;
+          color: #1a1a1a;
+          margin-bottom: 16px;
+        }
+
+        .badges-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+        }
+
+        .badge-item {
+          background: white;
+          border-radius: 12px;
+          padding: 16px;
+          text-align: center;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          transition: all 0.2s;
+        }
+
+        .badge-item.earned {
+          border: 2px solid #2d7f3e;
+        }
+
+        .badge-item.locked {
+          opacity: 0.4;
+        }
+
+        .badge-icon {
+          font-size: 32px;
+          margin-bottom: 8px;
+        }
+
+        .badge-name {
+          display: block;
+          font-size: 11px;
+          font-weight: 600;
+          color: #1a1a1a;
+        }
+
+        /* Passport */
+        .passport-card {
+          background: white;
+          border-radius: 16px;
+          padding: 24px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .passport-cover {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        .passport-emblem {
+          font-size: 48px;
+          margin-bottom: 12px;
+        }
+
+        .passport-title {
+          font-family: 'Fraunces', serif;
+          font-size: 20px;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin-bottom: 4px;
+        }
+
+        .passport-date {
+          font-size: 13px;
+          color: #666;
+        }
+
+        .passport-stamps {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+
+        .stamp {
+          aspect-ratio: 1;
+          background: #f5f5f5;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          font-weight: 700;
+        }
+
+        .stamp.earned {
+          background: linear-gradient(135deg, #2d7f3e 0%, #1a5c2a 100%);
+          color: white;
+        }
+
+        .stamp.empty {
+          color: #ccc;
+        }
+
+        /* Recipes */
+        .recipe-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .recipe-item {
+          background: white;
+          border-radius: 12px;
+          padding: 12px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+
+        .recipe-item:hover {
+          transform: translateX(4px);
+        }
+
+        .recipe-thumb {
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+
+        .recipe-info {
+          flex: 1;
+        }
+
+        .recipe-name {
+          display: block;
+          font-weight: 600;
+          font-size: 14px;
+          color: #1a1a1a;
+          margin-bottom: 4px;
+        }
+
+        .recipe-meta {
+          display: block;
+          font-size: 12px;
+          color: #666;
+        }
+
+        .recipe-arrow {
+          color: #ccc;
+        }
+
+        /* Post Event */
+        .unlock-card {
+          background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+          border-radius: 16px;
+          padding: 24px;
+          text-align: center;
+        }
+
+        .unlock-icon {
+          font-size: 48px;
+          margin-bottom: 12px;
+        }
+
+        .unlock-title {
+          font-weight: 700;
+          font-size: 18px;
+          color: #1a1a1a;
+          margin-bottom: 8px;
+        }
+
+        .unlock-text {
+          font-size: 14px;
+          color: #666;
+          line-height: 1.5;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: white;
+          border-top: 1px solid #e0e0e0;
+          display: flex;
+          justify-content: space-around;
+          padding: 8px 0 24px 0;
+          box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 8px 16px;
+          border-radius: 12px;
+          transition: all 0.2s;
+          color: #999;
+          position: relative;
+        }
+
+        .nav-item.active {
+          color: #2d7f3e;
+        }
+
+        .nav-item span {
+          font-size: 11px;
+          font-weight: 600;
+        }
+
+        .nav-badge {
+          position: absolute;
+          top: 4px;
+          right: 8px;
+          width: 18px;
+          height: 18px;
+          background: #e74c3c;
+          color: white;
+          border-radius: 50%;
+          font-size: 10px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 400px) {
+          .phone-frame {
+            width: 100%;
+            height: 100vh;
+            border-radius: 0;
+          }
+        }
+
+        /* Smooth scrolling */
+        .screen-wrapper::-webkit-scrollbar {
+          width: 0;
+        }
+      `}</style>
+
+      <div className="phone-frame">
+        <div className="phone-notch"></div>
+        <div className="screen-wrapper">
+          {currentScreen === 'home' && <HomeScreen />}
+          {currentScreen === 'map' && <MapScreen />}
+          {currentScreen === 'quests' && <QuestScreen />}
+          {currentScreen === 'profile' && <ProfileScreen />}
+        </div>
+        <NavBar />
+      </div>
+    </div>
+  );
+}
