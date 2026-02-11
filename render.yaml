@@ -3,7 +3,7 @@ services:
     name: carassauga-backend
     env: node
     rootDir: server
-    buildCommand: npm install
+    buildCommand: cd server && npm install
     startCommand: npx ts-node --transpile-only src/server.ts
     envVars:
       - key: NODE_ENV
