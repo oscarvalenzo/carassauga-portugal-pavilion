@@ -8,7 +8,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000, // 10 second timeout
+  timeout: 60000, // 60 second timeout (Render free tier can take 30s to wake up)
 });
 
 // Request Interceptor - Add auth token
@@ -41,15 +41,16 @@ api.interceptors.response.use(
       window.dispatchEvent(new CustomEvent('auth:logout'));
     }
     
-    // Log errors in development
-    if (import.meta.env.DEV) {
-      console.error('API Error:', {
-        url: error.config?.url,
-        method: error.config?.method,
-        status: error.response?.status,
-        data: error.response?.data,
-      });
-    }
+    // Log errors (always log in production for debugging)
+    console.error('API Error:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+      message: error.message,
+      code: error.code,
+    });
     
     return Promise.reject(error);
   }

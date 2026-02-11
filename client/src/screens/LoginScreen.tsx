@@ -60,8 +60,12 @@ export default function LoginScreen({ onLoginSuccess, onSwitchToRegister, showTo
       } else if (error.response?.data?.error) {
         const errorMsg = error.response.data.error;
         showToast(typeof errorMsg === 'string' ? errorMsg : 'Login failed', 'error');
+      } else if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        showToast('Request timed out. The server may be waking up. Please try again in a moment.', 'error');
+      } else if (!error.response) {
+        showToast('Cannot connect to server. Please check your internet connection.', 'error');
       } else {
-        showToast('Login failed. Please check your connection.', 'error');
+        showToast(`Login failed: ${error.message || 'Please check your connection.'}`, 'error');
       }
     } finally {
       setLoading(false);

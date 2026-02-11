@@ -49,17 +49,33 @@ const allowedOrigins = [
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-    // In production, allow Firebase hosting URLs
+    if (!origin) {
+      console.log('CORS: Allowing request with no origin');
+      return callback(null, true);
+    }
+    
+    console.log('CORS: Checking origin:', origin);
+    
+    // In production, be more permissive
     if (process.env.NODE_ENV === 'production') {
-      if (origin.includes('carassauga-app.web.app') || origin.includes('carassauga-app.firebaseapp.com') || allowedOrigins.includes(origin)) {
+      // Allow Firebase hosting URLs
+      if (origin.includes('carassauga-app.web.app') || 
+          origin.includes('carassauga-app.firebaseapp.com') ||
+          origin.includes('onrender.com') ||
+          allowedOrigins.includes(origin)) {
+        console.log('CORS: Allowing origin (production):', origin);
         return callback(null, true);
       }
     }
+    
+    // Check allowed origins
     if (allowedOrigins.includes(origin)) {
+      console.log('CORS: Allowing origin (allowed list):', origin);
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      console.log('CORS: Blocking origin:', origin);
+      console.log('CORS: Allowed origins:', allowedOrigins);
+      callback(new Error(`Not allowed by CORS: ${origin}`));
     }
   },
   credentials: true
