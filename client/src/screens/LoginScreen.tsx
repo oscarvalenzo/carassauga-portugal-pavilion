@@ -69,8 +69,8 @@ export default function LoginScreen({ onLoginSuccess, onSwitchToRegister, showTo
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary to-primary/90 flex items-center justify-center px-6 py-12 font-sf-text">
-      <div className="w-full max-w-md">
+    <div className="min-h-full bg-gradient-to-br from-primary to-primary/90 flex flex-col items-center justify-center px-6 py-8 font-sf-text">
+      <div className="w-full max-w-md py-4">
         {/* Logo/Header */}
         <div className="text-center mb-10">
           <div className="w-20 h-20 mx-auto mb-6 bg-white/20 backdrop-blur-xl rounded-3xl flex items-center justify-center shadow-2xl">

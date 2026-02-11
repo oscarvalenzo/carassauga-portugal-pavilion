@@ -89,21 +89,25 @@ function App() {
 
     if (currentScreen === 'login') {
       return (
-        <LoginScreen
-          onLoginSuccess={handleLoginSuccess}
-          onSwitchToRegister={() => setCurrentScreen('register')}
-          showToast={showToast}
-        />
+        <div className="flex-1 overflow-y-auto">
+          <LoginScreen
+            onLoginSuccess={handleLoginSuccess}
+            onSwitchToRegister={() => setCurrentScreen('register')}
+            showToast={showToast}
+          />
+        </div>
       );
     }
 
     if (currentScreen === 'register') {
       return (
-        <RegisterScreen
-          onRegisterSuccess={handleRegisterSuccess}
-          onSwitchToLogin={() => setCurrentScreen('login')}
-          showToast={showToast}
-        />
+        <div className="flex-1 overflow-y-auto">
+          <RegisterScreen
+            onRegisterSuccess={handleRegisterSuccess}
+            onSwitchToLogin={() => setCurrentScreen('login')}
+            showToast={showToast}
+          />
+        </div>
       );
     }
 
